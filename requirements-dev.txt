@@ -1,0 +1,9 @@
+# Local development only: cleaning raw Excel files, running the notebook,
+# and tests. Not needed to run the dashboard - see requirements.txt for
+# that. Install both for local dev: pip install -r requirements.txt -r requirements-dev.txt
+openpyxl>=3.1
+xlrd>=2.0
+jupyter>=1.0
+matplotlib>=3.7
+seaborn>=0.12
+pytest>=8.0

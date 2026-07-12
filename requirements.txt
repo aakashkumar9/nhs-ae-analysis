@@ -1,0 +1,19 @@
+# What the deployed dashboard actually needs (Streamlit Community Cloud
+# reads this file to build the app). Local data-wrangling/notebook
+# dependencies live in requirements-dev.txt instead - keeping this file
+# lean avoids pulling in unrelated dependency trees (e.g. jupyter's) that
+# have caused dependency-resolution failures on Streamlit Cloud before.
+#
+# pandas<3.0 and pyarrow 22-24 are pinned deliberately: pandas 3.0.x and
+# pyarrow 25.x segfault (native crash, no Python traceback) inside
+# Streamlit's rerun/dataframe-serialization machinery on this project's
+# dashboard - see the "Known issues" note in README.md. pyarrow<22 has no
+# Python 3.14 wheel (Streamlit Cloud's current runtime) and fails the build
+# entirely rather than crashing at runtime, so the floor matters as much as
+# the ceiling here. Confirmed fixed by pinning to these ranges; re-test
+# thoroughly (see the note) before loosening any of these.
+streamlit>=1.30
+duckdb>=0.10
+pandas>=2.0,<3.0
+pyarrow>=22,<25
+plotly>=5.20
